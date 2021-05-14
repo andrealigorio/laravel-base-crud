@@ -17,7 +17,7 @@ class CreateDressesTable extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('size', 4);
-            $table->string('image', 50);
+            $table->string('image', 50)->nullable()->default('img_default.jpg');
             $table->string('color', 20);
             $table->tinyInteger('quantity');
             $table->float('price', 6,2);

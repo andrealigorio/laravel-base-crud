@@ -6,7 +6,11 @@
     <div class="jumbo news">
             <div class="dress_box">
                 <div class="dress_image">
-                    <img src="{{asset('img/'. $dress['image'])}}" alt="">
+                    @if ($dress['image'] != null)
+                        <img src="{{asset('img/'. $dress['image'])}}" alt="">
+                    @else
+                        <img src="{{asset('img/img_default.jpg')}}" alt="">
+                    @endif
                 </div>
                 <div class="dress_content">
                     <h2 class="name">{{$dress['name']}}</h2>

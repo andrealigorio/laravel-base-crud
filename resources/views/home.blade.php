@@ -10,7 +10,7 @@
                 <h2>new style</h2>
                 <h1>new collection</h1>
             </div>
-            <button class="btn btn_jumbo">BUY NOW</button>
+            <a href="{{route('vestiti.create')}}" class="btn btn_jumbo">AGGIUNGI UN NUOVO PRODOTTO</a>
         </div>
     </div>
 @endsection
