@@ -44,14 +44,15 @@ class DressController extends Controller
         
         $new_dress = new Dress();
 
-        $new_dress->name = $data['name'];
+        /* $new_dress->name = $data['name'];
         $new_dress->size = $data['size'];
         $new_dress->image = $data['image'];
         $new_dress->color = $data['color'];
         $new_dress->quantity = $data['quantity'];
         $new_dress->price = $data['price'];
-        $new_dress->description = $data['description'];
+        $new_dress->description = $data['description']; */
 
+        $new_dress->fill($data);
         $new_dress->save();
 
         return redirect()->route('vestiti.index');
