@@ -47,8 +47,8 @@ class DressController extends Controller
             'size' => 'required|max:4',
             'image' => 'nullable',
             'color' => 'required|max:20',
-            'quantity' => 'required|max:1000',
-            'price' => 'required|max:9999.99',
+            'quantity' => 'required|numeric|max:1000',
+            'price' => 'required|numeric|max:9999.99',
             'description' => 'nullable',
         ]);
         
@@ -109,6 +109,17 @@ class DressController extends Controller
     public function update(Request $request, Dress $dress)
     {
         $data = $request->all();
+
+        $request->validate([
+            'name' => 'required|unique:dresses|max:50',
+            'size' => 'required|max:4',
+            'image' => 'nullable',
+            'color' => 'required|max:20',
+            'quantity' => 'required|numeric|max:1000',
+            'price' => 'required|numeric|max:9999.99',
+            'description' => 'nullable',
+        ]);
+        
         $dress->update($data);
 
         return redirect()->route('dresses.index');
@@ -123,7 +134,7 @@ class DressController extends Controller
     public function destroy(Dress $dress)
     {
         $dress->delete();
-        
+
         return redirect()->route('dresses.index');
     }
 }

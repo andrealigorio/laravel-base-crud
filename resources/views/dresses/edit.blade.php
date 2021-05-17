@@ -4,6 +4,15 @@
 
 @section('content')
 <div class="jumbo news">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form class="my_form" action="{{route('dresses.update', $dress['id'])}}" method="post">
         @csrf
         {{-- <input name="_method" type="hidden" value="POST">   con la forma in blade come sotto--}}
