@@ -22,7 +22,15 @@
                             <td>{{$dress['name']}}</td>
                             <td>{{$dress['description']}}</td>
                             <td>{{$dress['price']}} €</td>
-                            <td><a href="{{route('vestiti.show', ['vestiti' => $dress['id']])}}" class="btn btn_table">Details</a></td>
+                            <td>
+                                <a href="{{route('dresses.show', [$dress['id']])}}" class="btn btn_table">Details</a>
+                                <a href="{{route('dresses.edit', [$dress['id']])}}" class="btn btn_table">Update</a>
+                                <form class="delete" action="{{route('dresses.destroy', $dress['id'])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn_table btn_delete" type="submit">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

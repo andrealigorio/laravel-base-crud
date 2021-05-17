@@ -41,6 +41,16 @@ class DressController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        $request->validate([
+            'name' => 'required|unique:dresses|max:50',
+            'size' => 'required|max:4',
+            'image' => 'nullable',
+            'color' => 'required|max:20',
+            'quantity' => 'required|max:1000',
+            'price' => 'required|max:9999.99',
+            'description' => 'nullable',
+        ]);
         
         $new_dress = new Dress();
 
@@ -55,7 +65,7 @@ class DressController extends Controller
         $new_dress->fill($data);
         $new_dress->save();
 
-        return redirect()->route('vestiti.index');
+        return redirect()->route('dresses.index');
     }
 
     /**
@@ -64,18 +74,18 @@ class DressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dress $dress)
     {
-        if($id) {
-            $dress = Dress::find($id);
+        /* if($id) {
+            $dress = Dress::find($id); */
 
             /* $data = [
                 'dress' => $dress
             ]; */
 
             return view('dresses.show', compact('dress'));
-        }
-        abort(404);
+        /*  }
+        abort(404); */
     }
 
     /**
@@ -84,9 +94,9 @@ class DressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dress $dress)
     {
-        //
+        return view('dresses.edit', compact('dress'));
     }
 
     /**
@@ -96,9 +106,12 @@ class DressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dress $dress)
     {
-        //
+        $data = $request->all();
+        $dress->update($data);
+
+        return redirect()->route('dresses.index');
     }
 
     /**
@@ -107,8 +120,10 @@ class DressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dress $dress)
     {
-        //
+        $dress->delete();
+        
+        return redirect()->route('dresses.index');
     }
 }

@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'MainController@index')->name('pagina-home');
 Route::get('/news', 'MainController@news')->name('pagina-news');
-Route::resource('/vestiti', 'DressController');
+Route::resource('/dresses', 'DressController');
