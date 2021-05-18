@@ -145,7 +145,7 @@ footer {
 .active {
     border-bottom: 2px solid #414143;
 }
-.alert.alert-danger {
+.alert.alert-danger, .alert.alert-success {
     display: inline-block;
     padding: 0 20px;
     margin-left: 40px;

@@ -7,6 +7,18 @@ use App\Dress;
 
 class DressController extends Controller
 {
+    protected function valida(Request $request) {
+
+        $request->validate([
+            'name' => 'required|max:50',
+            'size' => 'required|max:4',
+            'image' => 'nullable',
+            'color' => 'required|max:20',
+            'quantity' => 'required|numeric|max:1000',
+            'price' => 'required|numeric|max:9999.99',
+            'description' => 'nullable',
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,15 +54,7 @@ class DressController extends Controller
     {
         $data = $request->all();
 
-        $request->validate([
-            'name' => 'required|unique:dresses|max:50',
-            'size' => 'required|max:4',
-            'image' => 'nullable',
-            'color' => 'required|max:20',
-            'quantity' => 'required|numeric|max:1000',
-            'price' => 'required|numeric|max:9999.99',
-            'description' => 'nullable',
-        ]);
+        $this->valida($request);
         
         $new_dress = new Dress();
 
@@ -110,16 +114,8 @@ class DressController extends Controller
     {
         $data = $request->all();
 
-        $request->validate([
-            'name' => 'required|unique:dresses|max:50',
-            'size' => 'required|max:4',
-            'image' => 'nullable',
-            'color' => 'required|max:20',
-            'quantity' => 'required|numeric|max:1000',
-            'price' => 'required|numeric|max:9999.99',
-            'description' => 'nullable',
-        ]);
-        
+        $this->valida($request);
+
         $dress->update($data);
 
         return redirect()->route('dresses.index');
@@ -135,6 +131,6 @@ class DressController extends Controller
     {
         $dress->delete();
 
-        return redirect()->route('dresses.index');
+        return redirect()->route('dresses.index')->with('status', 'Vestito cancellato');
     }
 }
